@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 	Modified: Suk Yee Yong
-	Updated: 22 June 2021
+	Updated: 6 June 2023
 	
 	Big Picture by HTML5 UP
 	html5up.net | @ajlkn
@@ -21,267 +21,324 @@
 	<body>
 
 		<!-- Header -->
-			<header id="header">
-				<h1><a href="#home">Suk Yee Yong</a></h1>
-				<nav>
-					<ul style="font-weight:700;color:var(--text-color)">
-						<li><a href="#about">ABOUT</a></li>
-						<li><a href="#research">RESEARCH</a></li>
-						<li><a href="#project">PROJECT</a></li>
-						<li><a href="#contact">CONTACT</a></li>
-						<li><button id="toggleTheme" class="darkmodebtn far fa-moon"></button></li>
-					</ul>
-				</nav>
-			</header>
+		<header id="header">
+			<h1><a href="#home">Suk Yee Yong</a></h1>
+			<nav>
+				<ul style="font-weight:700;color:var(--text-color)">
+					<li><a href="#about">ABOUT</a></li>
+					<li><a href="#research">RESEARCH</a></li>
+					<li><a href="#project">PROJECT</a></li>
+					<li><a href="#contact">CONTACT</a></li>
+					<li><button type="button" class="theme-icon">
+						<i aria-hidden="true" class="fas fa-moon"></i>
+						<i aria-hidden="true" class="fas fa-sun"></i>
+					</button></li>
+				</ul>
+			</nav>
+		</header>
 
 		<!-- Home -->
-			<section id="home" class="main style1 black fullscreen">
-				<div class="content">
-					<header>
-						<h2>Suk Yee Yong</h2>
-					</header>
-					<p style="color:#ffffff;opacity:50%">Astrophysics &middot Machine learning &middot Artificial intelligence &middot Data science</p>
-					<footer>
-						<a href="#about" class="button fit scrolly">Learn More</a>
-					</footer>
-				</div>
-			</section>
+		<section id="home" class="main style1 black fullscreen">
+			<div class="content">
+				<header>
+					<h2>Suk Yee Yong</h2>
+				</header>
+				<p style="color:#ffffff;opacity:50%">Machine learning specialist &middot Astrophysicist &middot Data scientist</p>
+				<footer>
+					<a href="#about" class="button fit scrolly">Learn More</a>
+				</footer>
+			</div>
+		</section>
 
 		<!-- About -->
-			<section id="about" class="main style2 right fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>About Me</h2>
-					</header>
-					<p>
-					Hello! I'm a <a href="https://www.csiro.au/en/research/technology-space/astronomy-space" target="_blank">Space and Astronomy</a> <a href="https://research.csiro.au/mlai-fsp/our-people/our-postdocs/" target="_blank">CSIRO Early Research Career Postdoctoral Fellow</a> in the <a href="https://research.csiro.au/mlai-fsp/" target="_blank">Machine Learning and Artificial Intelligence Future Science Platform (MLAI FSP)</a>. My current research involves using ML and AI algorithms for finding the rare and unknowns in astronomical datasets. <br>
-					<br>
-					I completed my PhD in Astrophysics and Masters of Science (Physics) from the <a href="http://physics.unimelb.edu.au/" target="_blank">University of Melbourne</a> under the supervision of <a href="http://www.ph.unimelb.edu.au/~rwebster/website/index.html" target="_blank">Professor Rachel Webster</a>. My thesis focused on exploring the observable properties of quasars using simulations, statistical methods, and ML techniques. <br>
-					<br>
-					My research fields are in astronomy, astrophysics, ML nd AI. My interests include quasars broad line region and application of statistics, ML, AI, and data science techniques to solve real-world problems. <br>
-					<a href="files/CV_sukyee.pdf" target="_blank" class="button" style="float:right;margin-left:5pt"><i class="fas fa-graduation-cap"></i> Download CV</a>
-					<a href="https://minerva-access.unimelb.edu.au/handle/11343/234190" target="_blank" class="button" style="float:right"><i class="fas fa-book"></i> PhD Thesis</a>
-					</p>
-				</div>
-				<a href="#research" class="button style2 down anchored">Next</a>
-			</section>
+		<section id="about" class="main style2 right fullscreen">
+			<div class="content box style2">
+				<header>
+					<h2>About Me</h2>
+				</header>
+				<p>
+				Hello! Currently I am a Machine Learning (ML) Specialist at the <a href="https://www.csiro.au/" target="_blank">Commonwealth Scientific and Industrial Research Organisation (CSIRO)</a>.
+				Prior to this position, I was a Postdoctoral Fellow in Data Intensive Astronomy at Macquarie University and was a <a href="https://research.csiro.au/mlai-fsp/postdoc-alumni/" target="_blank">Early Research Career Postdoctoral Fellow</a> in the <a href="https://research.csiro.au/mlai-fsp/" target="_blank">Machine Learning and Artificial Intelligence Future Science Platform</a> and <a href="https://www.csiro.au/en/research/technology-space/astronomy-space" target="_blank">Space and Astronomy</a> at CSIRO. <br>
+				<br>
+				I completed my PhD in Astrophysics and Masters of Science (Physics) from the <a href="http://physics.unimelb.edu.au/" target="_blank">University of Melbourne</a> under the supervision of <a href="https://www.ph.unimelb.edu.au/~rwebster/website/index.html" target="_blank">Professor Rachel Webster</a>. My thesis focused on exploring the observable properties of quasars using simulations, statistical methods, and ML techniques. <br>
+				<br>
+				My research interest includes application of statistics, ML, and data science techniques to solve real-world challenges. <br>
+				<br>
+				<a href="files/CV_sukyee.pdf" target="_blank" class="button" style="float:right;margin-left:5pt"><i class="fas fa-graduation-cap"></i> Download CV</a>
+				<a href="https://minerva-access.unimelb.edu.au/handle/11343/234190" target="_blank" class="button" style="float:right;margin-left:5pt"><i class="fas fa-book"></i> PhD Thesis</a>
+				<a href="images/PhDCover_sukyee.pdf" target="_blank" class="button" style="float:right"><i class="fas fa-book-open"></i> PhD Cover</a>
+				</p>
+			</div>
+			<a href="#research" class="button style2 down anchored">Next</a>
+		</section>
 
 		<!-- Research -->
-			<section id="research" class="main style3 purples1">
-				<div class="content">
-					<header>
-						<h2>Research</h2>
-						<p style="color:var(--text-color)">List of current research projects</p>
-					</header>
+		<section id="research" class="main style3 purples1">
+			<div class="content">
+				<header>
+					<h2>Research</h2>
+					<p style="color:var(--text-color)">List of current role and collaborative projects</p>
+				</header>
 
-					<!-- Gallery  -->
-					<div class="gallery">
-						<!-- Finding Unknowns -->
-						<article class="from-top" style="width:100%">
-							<div class="content box style3" style="margin-bottom:1em">
-								<header><h3>Finding the Unknowns in Astronomical Datasets with Machine Learning Techniques</h3></header>
-								<p style="margin-top:-2.5em;font-size:90%;opacity:0.6">In collaboration with CSIRO Space and Astronomy, Data61 FSP, UWS</p>
-								<ul class="star">
-									<li>The hunt for any unexpected or significant radio signals, including those that could be astronomical or from (plausible) extraterrestrial intelligence, in the Murriyang (Parkes) telescope data.</li>
-									<li>Develop machine learning algorithms to detect these signals.</li>
-									<li>Further application to major radio surveys, such as the Australian Square Kilometre Array Pathfinder (ASKAP) and Evolutionary Map of the Universe (EMU).</li>
-									<li>The discovery would be of major impact to human kind!</li>
-								</ul>
-							</div>
-						</article>
-						<!-- Quasar Disk-wind Phenomenology -->
-						<article class="from-top" style="width:100%">
-							<div class="content box style3" style="margin-bottom:1em">
-								<header><h3>Quasar Disk-wind Phenomenology</h3></header>
-								<p style="margin-top:-2.5em;font-size:90%;opacity:0.6">In collaboration with Rachel Webster (UniMelb)</p>
-								<ul class="star">
-									<li>Combine observations and modelling in a comprehensive review of the ultraviolet-optical emission region of quasar spectra.</li>
-									<li>Understand the geometry and physics of the quasar emission region.</li>
-								</ul>
-							</div>
-						</article>
-						<!-- Galaxy 3D Shape -->
-						<article class="from-top" style="width:100%">
-							<div class="content box style3" style="margin-bottom:1em">
-								<header><h3>Galaxy 3D Shape Recovery using Neural Networks</h3></header>
-								<p style="margin-top:-2.5em;font-size:90%;opacity:0.6">In collaboration with Caroline Foster (USyd), Kate Harborne (ICRAR/UWA), Robert Bassett (CSL)</p>
-								<ul class="star">
-									<li>Further extension from galaxy shape recovery project to include a range of mock simulation data, while ensuring equal representation of each galaxy projection.</li>
-									<li>These will be used to train the neural network model to predict the shape of the galaxy.</li>
-								</ul>
-							</div>
-						</article>
-						<!-- TODO: Add research here! -->
-					</div>
-				</div>
-				<a href="#project" class="button style2 down anchored">Next</a>
-			</section>
-
-			<!-- Project -->
-				<section id="project" class="main style3 purples2">
-					<div class="content">
-						<header>
-							<h2>Project</h2>
-							<p style="color:var(--text-color)">Showcase of selected past projects and publications</p>
-						</header>
-	
-						<!-- Gallery  -->
-						<div class="gallery">
-							<!-- BH Mass -->
-							<article class="from-left">
-								<a href="images/project/mbh.png"><img src="images/project/mbh.png" title="Black Hole Mass Estimation: How Good is the Virial Estimate?
-									<p>[ <a href='https://ui.adsabs.harvard.edu/abs/2016PASA...33....9Y/abstract' target='_blank'>ADS</a> | <a href='https://arxiv.org/abs/1602.04672' target='_blank'>arXiv</a> ]</p>
-									<p>
-										Black hole (BH) masses calibration at high redshifts often depends on secondary mass estimators. The estimated virial mass BH is linked with the true BH mass by the virial scale factor, <i>f</i>. A dynamical disk-wind broad line region model of active galactic nuclei is built to recover <i>f</i>. Several factors affect the <i>f</i> values, including the BLR geometry, location of emission region, and inclination angle. Different line width characterisation might also induce bias in the estimation.
-									</p>" alt="" style="width:420px;height:250px;" />
-									<div class="overlay">
-										<div class="content box style2">
-											<p>Virial Black Hole Mass Estimation</p>
-										</div>
-									</div>
-								</a>
-							</article>
-							<!-- Quasar BELR -->
-							<article class="from-right">
-								<a href="images/project/kinematic_dw.png"><img src="images/project/kinematic_dw.png" title="The Kinematics of Quasar Broad Emission Line Region Using a Disk-wind Model
-									<p>[ <a href='https://ui.adsabs.harvard.edu/abs/2017PASA...34...42Y/abstract' target='_blank'>ADS</a> | <a href='https://arxiv.org/abs/1708.07237' target='_blank'>arXiv</a> ]</p>
-									<p>
-										The shapes of the emission line profiles are explored, taking into account three conditions: orientation, wind opening angle, and emission region. A simple kinematical disk-wind broad line region model combined with radiative transfer in the Sobolev limit is constructed. By including the correction for wind optical depth, single-peaked line profiles are recovered for intermediate and equatorial wind. The model is also able to reproduce a faster response in either the red or blue sides of the line profile as found in reverberation mapping studies.
-									</p>" alt="" style="width:420px;height:250px;" />
-									<div class="overlay">
-										<div class="content box style2">
-											<p>Quasar Broad Emission Line Region with Disk-wind Model</p>
-										</div>
-									</div>
-								</a>
-							</article>
-							<!-- BALQ -->
-							<article class="from-left">
-								<a href="images/project/agnwind.png"><img src="images/project/agnwind.png" title="Using the Properties of Broad Absorption Line Quasars to Illuminate Quasar Structure
-									<p>[ <a href='https://ui.adsabs.harvard.edu/abs/2018MNRAS.479.4153Y/abstract' target='_blank'>ADS</a> | <a href='https://arxiv.org/abs/1806.07090' target='_blank'>arXiv</a> ]</p>
-									<p>
-										The observed spectral properties of broad absorption line quasars (BALQs) provides a key to understand quasar unification paradigms. Statistical methods and supervised machine learning classification are employed to learn whether it is possible to separate BALQs and non-BALQs given the continuum and emission line properties. The distributions of the BALQ and non-BALQ properties are similar. None of the observed features are able to differentiate the two samples. Most published narrow disk-wind models are inconsistent with these observations. An alternative disk-wind model is proposed: a wide wind opening angle with multiple radial streams of dense clumps.
-									</p>" alt="" style="width:420px;height:250px;" />
-									<div class="overlay">
-										<div class="content box style2">
-											<p>Broad Absorption Line Quasars with Statistics and Machine Learning</p>
-										</div>
-									</div>
-								</a>
-							</article>
-							<!-- Quasar Orientation -->
-							<article class="from-right">
-								<a href="images/project/diffv+ratiofwhm_oriention.png"><img src="images/project/diffv+ratiofwhm_oriention.png" title="Determining Quasar Orientation
-									<p>[ <a href='https://ui.adsabs.harvard.edu/abs/2020MNRAS.491.1320Y/abstract' target='_blank'>ADS</a> | <a href='https://arxiv.org/abs/1910.13597' target='_blank'>arXiv</a> ]</p>
-									<p>
-										A unified model of active galactic nuclei based on orientation predicts that the diverse subclasses can be explained by the different viewing angles of the observer. Though several orientation indicators have been suggested, a widely applicable measure has yet to be found. Using two easily measured properties of the emission line in the ultraviolet-optical, the correlation between the velocity shifts and line widths is shown to be due to orientation.
-									</p>" alt="" style="width:420px;height:250px;" />
-									<div class="overlay">
-										<div class="content box style2">
-											<p>Quasar Orientation Indicator</p>
-										</div>
-									</div>
-								</a>
-							</article>
-							<!-- Galaxy Shape -->
-							<article class="from-left">
-								<a href="images/project/galaxyshape_vmap.png"><img src="images/project/galaxyshape_vmap.png" title="Recover the 3D shape of galaxy using deep learning
-									<p style='font-size:90%;opacity:0.7'>In collaboration with <a href='https://adacs.org.au/' target='_blank'>Astronomy Data And Computing Services (ADACS)</a> and <br> <a href='https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/' target='_blank'>Centre for Astrophysics & Supercomputing Swinburne University of Technology</a></p>
-									<p style='margin-top:-1em'>[ <a href='https://adacs.org.au/project/shaping-a-galaxy-an-internship-success-story/' target='_blank'>Overview</a> ]</p>
-									<p>
-										The project aims to recover the 3D shape of the galaxies from the 2D projection. A neural network model is trained using simulated galaxies, while exploring which parameters are useful in providing information on the shape of the galaxy. Based on the trained model, predictions of the galaxy shape are made. The project was the first to utilise machine learning to recover the 3D galaxy shape from the 2D images. It provides a foundation in predicting the shapes of real galaxies and giving fundamental insight of our universe. The project has then been extended to include more collaborators and further development of the model.
-									</p>" alt="" style="width:420px;height:250px;" />
-									<div class="overlay">
-										<div class="content box style2">
-											<p>Galaxy 3D Shape using Deep Learning</p>
-										</div>
-									</div>
-								</a>
-							</article>
-							<!-- Biomedical Imaging -->
-							<article class="from-right">
-								<a href="images/project/eye_dr.png"><img src="images/project/eye_dr.png" title="The eyes and the sky — medical image analysis with astrophysics supercomputing
-									<p style='font-size:90%;opacity:0.7'>In collaboration with <a href='https://www.cera.org.au/' target='_blank'>Centre for Eye Research Australia (CERA)</a> and <br> <a href='https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/' target='_blank'>Centre for Astrophysics & Supercomputing Swinburne University of Technology</a></p>
-									<p>
-										The project aims to extract spectral features of the retina from hyperspectral retinal images with machine learning and deep learning methods. Using an autoencoder model to extract the encodings in the 2D latent space, the model is able to segment the features of the retina well. One of the results is shown in the figure with ground truth labels overlaid as points. The approach is performed in an unsupervised (trained without labelled data) manner, which is promising as labelled data can be expensive and scarce. It has the potential for detection of anomalies, enabling early diagnosis of eye diseases, such as Alzheimer’s disease and glaucoma, at a stage when treatment may be most effective.
-									</p>" alt="" style="width:420px;height:250px;" />
-									<div class="overlay">
-										<div class="content box style2">
-											<p>Biomedical Imaging Analysis with Astrophysics</p>
-										</div>
-									</div>
-								</a>
-							</article>
-							<!-- TODO: Add project here! Format for paragraph description: aim, method, results -->
-						</div>
-						<p><a href="https://ui.adsabs.harvard.edu/#search/fq=%7B!type%3Daqp%20v%3D%24fq_author%7D&fq_author=(author_facet_hier%3A%221%2FYong%2C%20S%2FYong%2C%20Suk%20Yee%22%20OR%20author_facet_hier%3A%221%2FYong%2C%20S%2FYong%2C%20S%20%20-%20%20Y%22%20OR%20author_facet_hier%3A%221%2FYong%2C%20S%2FYong%2C%20S-%20%20Y%22)&q=%20author%3A%22Yong%2C%20Suk%20Yee%22&sort=date%20desc%2C%20bibcode%20desc" target="_blank" class="button"><i class="fab fa-leanpub"></i> All Publications</a></p>
-					</div>
-					<a href="#contact" class="button style2 down anchored">Next</a>
-				</section>
-	
-		<!-- Contact -->
-			<section id="contact" class="main style3 purples3">
-				<div class="content">
-					<header>
-						<h2>Contact Details</h2> <br>
-						<h3><i class="fas fa-envelope"></i> E-mail</h3>
-						<p style="color:var(--text-color)"><a href="mailto:sukyee.yong@csiro.au">sukyee.yong@csiro.au</a></p>
-						<h3><i class="fas fa-building"></i> Location</h3>
-						<p style="color:var(--text-color)">
-							CSIRO Space and Astronomy <br>
-							Corner Vimiera & Pembroke Roads <br>
-							Marsfield, NSW 2122, Australia
-						</p>
-						<h3><i class="fas fa-map-marked-alt"></i> Map</h3>
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3316.5199079791414!2d151.09598931528723!3d-33.77306992152823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12a67c1614b193%3A0x87486f3a6c5ac940!2sCSIRO%20-%20Marsfield%20Site!5e0!3m2!1sen!2sau!4v1624091256431!5m2!1sen!2sau" width="400" height="250" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-					</header>
-					<!-- Message box -->
-					<!-- <div class="box">
-						<form method="post" action="#">
-							<div class="field half first"><input type="text" name="name" placeholder="Name" /></div>
-							<div class="field half"><input type="email" name="email" placeholder="Email" /></div>
-							<div class="field"><textarea name="message" placeholder="Message" rows="6"></textarea></div>
-							<ul class="actions">
-								<li><input type="submit" value="Send Message" /></li>
+				<!-- Gallery  -->
+				<div class="gallery">
+					<!-- ML Specialist -->
+					<article class="from-top" style="width:100%">
+						<div class="content box style3" style="margin-bottom:1em">
+							<header>
+								<h3>Machine Learning Specialist</h3>
+							</header>
+							<p style="margin-top:-2.5em;font-size:90%;opacity:0.6">Data Analytics and Visualisation, Scientific Computing Services</p>
+							<ul class="star">
+								<li>Collaborate with researchers to provide and develop data intensive workflows using machine learning.</li>
 							</ul>
-						</form>
-					</div> -->
+						</div>
+					<!-- Quasar Disk-wind Phenomenology -->
+					<article class="from-top" style="width:100%">
+						<div class="content box style3" style="margin-bottom:1em">
+							<header>
+								<h3>Quasar Disk-wind Phenomenology</h3>
+							</header>
+							<p style="margin-top:-2.5em;font-size:90%;opacity:0.6">In collaboration with Rachel Webster (UniMelb)</p>
+							<ul class="star">
+								<li>Combine observations and modelling in a comprehensive review of the ultraviolet-optical emission region
+									of quasar.</li>
+								<li>Understand the geometry and physics of the quasar emission region.</li>
+							</ul>
+						</div>
+					</article>
+					<!-- TODO: Add research here! -->
 				</div>
-			</section>
+			</div>
+			<a href="#project" class="button style2 down anchored">Next</a>
+		</section>
+
+		<!-- Project -->
+		<section id="project" class="main style3 purples2">
+			<div class="content">
+				<header>
+					<h2>Project</h2>
+				</header>
+
+				<!-- Project-Keyword Plotly -->
+				<iframe src="iprojectkeyword_code/iproject-keyword_full.html" style="width:100%;height:750px;margin-top:-2em"></iframe>
+
+				<p style="color:var(--text-color)">Showcase of selected projects and publications</p>
+				<!-- Gallery  -->
+				<div class="gallery">
+					<!-- BH Mass -->
+					<article id="mbhestimate" class="from-left">
+						<a href="images/project/mbh.png"><img src="images/project/mbh.png" title="Black Hole Mass Estimation: How Good is the Virial Estimate?
+							<p>[ <a href='https://arxiv.org/abs/1602.04672' target='_blank'>arXiv</a> | <a href='https://doi.org/10.1017/pasa.2016.8' target='_blank'>DOI</a> ]</p>
+							<p>
+								Black hole (BH) masses calibration at high redshifts often depends on secondary mass estimators. The estimated virial mass BH is linked with the true BH mass by the virial scale factor, <i>f</i>. A dynamical disk-wind broad line region (BLR) model of active galactic nuclei is built to recover <i>f</i>. Several factors affect the <i>f</i> values, including the BLR geometry, location of emission region, and inclination angle. Different line width characterisation might also induce bias in the estimation.
+							</p>
+							<p class='keywordtext'>Keywords: black hole; broad line region; disk-wind; quasar</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Virial Black Hole Mass Estimation</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- Quasar BELR -->
+					<article id="kinematicdw" class="from-right">
+						<a href="images/project/kinematic_dw.png"><img src="images/project/kinematic_dw.png" title="The Kinematics of Quasar Broad Emission Line Region Using a Disk-wind Model
+							<p>[ <a href='https://arxiv.org/abs/1708.07237' target='_blank'>arXiv</a> | <a href='https://doi.org/10.1017/pasa.2017.37' target='_blank'>DOI</a> ]</p>
+							<p>
+								The shapes of the emission line profiles are explored, taking into account three conditions: orientation, wind opening angle, and emission region. A simple kinematical disk-wind broad line region model combined with radiative transfer in the Sobolev limit is constructed. By including the correction for wind optical depth, single-peaked line profiles are recovered for intermediate and equatorial wind. The model is also able to reproduce a faster response in either the red or blue sides of the line profile as found in reverberation mapping studies.
+							</p>
+							<p class='keywordtext'>Keywords: broad line region; disk-wind; quasar; quasar orientation</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Quasar Broad Emission Line Region with Disk-wind Model</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- BALQ -->
+					<article id="balq" class="from-left">
+						<a href="images/project/agnwind.png"><img src="images/project/agnwind.png" title="Using the Properties of Broad Absorption Line Quasars to Illuminate Quasar Structure
+							<p>[ <a href='https://arxiv.org/abs/1806.07090' target='_blank'>arXiv</a> | <a href='https://doi.org/10.1093/mnras/sty1540' target='_blank'>DOI</a> ]</p>
+							<p>
+								The observed spectral properties of broad absorption line quasars (BALQs) provides a key to understand quasar unification paradigms. Statistical methods and supervised machine learning classification are employed to learn whether it is possible to separate BALQs and non-BALQs given the continuum and emission line properties. The distributions of the BALQ and non-BALQ properties are similar. None of the observed features are able to differentiate the two samples. Most published narrow disk-wind models are inconsistent with these observations. An alternative disk-wind model is proposed: a wide wind opening angle with multiple radial streams of dense clumps.
+							</p>
+							<p class='keywordtext'>Keywords: broad line region; disk-wind; machine learning; quasar; quasar orientation</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Broad Absorption Line Quasars with Statistics and Machine Learning</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- Quasar Orientation -->
+					<article id="qsoorientation" class="from-right">
+						<a href="images/project/diffv+ratiofwhm_oriention.png"><img src="images/project/diffv+ratiofwhm_oriention.png" title="Determining Quasar Orientation
+							<p>[ <a href='https://arxiv.org/abs/1910.13597' target='_blank'>arXiv</a> | <a href='https://doi.org/10.1093/mnras/stz3074' target='_blank'>DOI</a> ]</p>
+							<p>
+								A unified model of active galactic nuclei based on orientation predicts that the diverse subclasses can be explained by the different viewing angles of the observer. Though several orientation indicators have been suggested, a widely applicable measure has yet to be found. Using two easily measured properties of the emission line in the ultraviolet-optical, the correlation between the velocity shifts and line widths is shown to be due to orientation.
+							</p>
+							<p class='keywordtext'>Keywords: broad line region; disk-wind; quasar; quasar orientation</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Quasar Orientation Indicator</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- Biomedical Imaging -->
+					<article id="eyedl" class="from-left">
+						<a href="images/project/eye_dr.png"><img src="images/project/eye_dr.png" title="The eyes and the sky — medical image analysis with astrophysics supercomputing
+							<p style='font-size:90%;opacity:0.7'>In collaboration with <a href='https://www.cera.org.au/' target='_blank'>Centre for Eye Research Australia (CERA)</a> and <br> <a href='https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/' target='_blank'>Centre for Astrophysics & Supercomputing Swinburne University of Technology</a></p>
+							<p>
+								The project aims to extract spectral features of the retina from hyperspectral retinal images with machine learning and deep learning methods. Using an autoencoder model to extract the encodings in the 2D latent space, the model is able to segment the features of the retina well. One of the results is shown in the figure with ground truth labels overlaid as points. The approach is performed in an unsupervised (trained without labelled data) manner, which is promising as labelled data can be expensive and scarce. It has the potential for detection of anomalies, enabling early diagnosis of eye diseases, such as Alzheimer's disease and glaucoma, at a stage when treatment may be most effective.
+							</p>
+							<p class='keywordtext'>Keywords: anomaly detection; biomedical; machine learning</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Biomedical Imaging Analysis with Astrophysics</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- SPARKESX -->
+					<article id="sparkesx" class="from-right">
+						<a href="images/project/sparkesx_multi.png"><img src="images/project/sparkesx_multi.png" title="SPARKESX: Single-dish PARKES data sets for finding the uneXpected - A data challenge
+							<p>[ <a href='https://arxiv.org/abs/2209.03080' target='_blank'>arXiv</a> | <a href='https://doi.org/10.1093/mnras/stac2558' target='_blank'>DOI</a> | <a href='https://doi.org/10.25919/fd4f-0g20' target='_blank'>Data</a> ]</p>
+							<p>
+								New classes of astronomical objects are often discovered serendipitously. We present the Single-dish PARKES data challenge for finding the uneXpected (SPARKESX), a compilation of real and simulated high-time resolution observations of the Parkes Murriyang radio telescope. The goal of this challenge is to aid in the development of new algorithms that can detect a wide-range of source types.
+							</p>
+							<p class='keywordtext'>Keywords: anomaly detection; extraterrestrial intelligence; transient</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>SPARKESX - A data challenge</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- UQ BH Mass -->
+					<article id="uqmbh" class="from-left">
+						<a href="images/project/uqmbh_pipeline.png"><img src="images/project/uqmbh_pipeline.png" title="Uncertainty Quantification of the Virial Black Hole Mass with Conformal Prediction
+							<p>[ <a href='https://arxiv.org/abs/2307.04993' target='_blank'>arXiv</a> | <a href='https://doi.org/10.1093/mnras/stad2080' target='_blank'>DOI</a> | <a href='https://github.com/yongsukyee/uncertain_blackholemass' target='_blank'>GitHub</a> ]</p>
+							<p>
+								A direct measure of the black hole mass is often restricted to nearest galaxies and instead, an indirect method using the single-epoch virial black hole mass estimation is used for objects at high redshifts. However, this method is subjected to biases and uncertainties as it is reliant on the scaling relation from a small sample of local active galactic nuclei. We propose the application of conformalised quantile regression (CQR) to quantify the uncertainties of the black hole predictions in a machine learning setting. In contrast to baseline approaches for prediction interval estimation, we show that the CQR method provides prediction intervals that adjust to the black hole mass and its related properties.
+							</p>
+							<p class='keywordtext'>Keywords: black hole; machine learning; quasar; uncertainty quantification</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Uncertainty Quantification of Black Hole Mass</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- Galaxy Shape -->
+					<article id="galaxyshape" class="from-right">
+						<a href="images/project/galaxyshape_mdn.png"><img src="images/project/galaxyshape_mdn.png" title="Galaxy 3D Shape Recovery using Neural Networks
+							<p style='font-size:90%;opacity:0.7'>In collaboration with <a href='https://adacs.org.au/' target='_blank'>Astronomy Data And Computing Services (ADACS)</a> and <br> <a href='https://www.swinburne.edu.au/research/centres-groups-clinics/centre-for-astrophysics-supercomputing/' target='_blank'>Centre for Astrophysics & Supercomputing Swinburne University of Technology</a></p>
+							<!-- TODO -->
+							<p style='margin-top:-1em'>[ <a href='https://adacs.org.au/project/shaping-a-galaxy-an-internship-success-story/' target='_blank'>Overview</a> ]</p>
+							<p>
+								Galaxy shape recovery studies have been exploiting the rich information from both the galaxy stellar kinematic maps and imaging to infer the underlying distribution of galaxy intrinsic (3D) shapes. In this work, we aim to recover the 3D shape of individual galaxies from their projected stellar kinematic and flux distribution maps without the dependence on potentially erroneous assumptions using a supervised machine learning approach with mixture density network (MDN). We demonstrate potential improvements achieved with the MDN model to retrieve the 3D galaxy shape compared to previous methods.
+							</p>
+							<p class='keywordtext'>Keywords: galaxy; machine learning</p>
+							"
+							alt="" style="width:420px;height:250px;" />
+							<div class="overlay">
+								<div class="content box style2">
+									<p>Galaxy 3D Shape using Deep Learning</p>
+								</div>
+							</div>
+						</a>
+					</article>
+					<!-- TODO: Add project here! Format for paragraph description: aim, method, results
+					Keywords: anomaly detection; biomedical; black hole; broad line region; disk-wind; extraterrestrial intelligence; galaxy; machine learning; quasar; quasar orientation; transient; uncertainty quantification -->
+				</div>
+				<p><a href="https://ui.adsabs.harvard.edu/#search/fq=%7B!type%3Daqp%20v%3D%24fq_author%7D&fq_author=(author_facet_hier%3A%221%2FYong%2C%20S%2FYong%2C%20Suk%20Yee%22%20OR%20author_facet_hier%3A%221%2FYong%2C%20S%2FYong%2C%20S%20%20-%20%20Y%22%20OR%20author_facet_hier%3A%221%2FYong%2C%20S%2FYong%2C%20S-%20%20Y%22)&q=%20author%3A%22Yong%2C%20Suk%20Yee%22&sort=date%20desc%2C%20bibcode%20desc" target="_blank" class="button"><i class="fab fa-leanpub"></i> All Publications</a></p>
+			</div>
+			<a href="#contact" class="button style2 down anchored">Next</a>
+		</section>
+
+		<!-- Contact -->
+		<section id="contact" class="main style3 purples3">
+			<div class="content">
+				<header>
+					<h2>Contact Details</h2> <br>
+					<h3 style="margin-bottom:-0.5em;"><i class="fas fa-envelope"></i> E-mail</h3>
+						<p style="color:var(--text-color)"><a href="mailto:sukyee.yong@csiro.au">sukyee.yong@csiro.au</a></p>
+					<h3 style="margin-top:1em;margin-bottom:-0.5em;"><i class="fas fa-building"></i> Location</h3>
+						<p style="color:var(--text-color)">
+							CSIRO IM&T <br>
+							Level 5, 13 Garden Street <br>
+							Eveleigh, NSW 2015, Australia
+						</p>
+					<h3 style="margin-top:1em;margin-bottom:0.5em;"><i class="fas fa-map-marked-alt"></i> Map</h3>
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.7758594881147!2d151.197152!3d-33.895426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12b1d015fe0c1f%3A0x1f7ca8e7d6621b24!2sCSIRO%20Data61!5e0!3m2!1sen!2sau!4v1685986014848!5m2!1sen!2sau" width="400" height="250" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					<div style="margin-top:1.5em;"></div><ul class="actions" style="color:var(--text-color)">
+						<li><a href="https://github.com/yongsukyee" target="_blank"><i class="faicon fab fa-github-square"></i></a></li>
+						<li><a href="https://orcid.org/0000-0002-5204-2902" target="_blank"><i class="faicon fab fa-orcid"></i></a></li>
+						<li><a href="https://au.linkedin.com/in/suk-yee-yong-98518a20b" target="_blank"><i class="faicon fab fa-linkedin"></i></a></li>
+						<!-- <li><a href="https://twitter.com/sukyeeyong" target="_blank"><i class="faicon fab fa-twitter-square"></i></a></li> -->
+					</ul>
+				</header>
+				<!-- Message box -->
+				<!-- <div class="box">
+					<form method="post" action="#">
+						<div class="field half first"><input type="text" name="name" placeholder="Name" /></div>
+						<div class="field half"><input type="email" name="email" placeholder="Email" /></div>
+						<div class="field"><textarea name="message" placeholder="Message" rows="6"></textarea></div>
+						<ul class="actions">
+							<li><input type="submit" value="Send Message" /></li>
+						</ul>
+					</form>
+				</div> -->
+			</div>
+		</section>
 
 		<!-- Footer -->
-			<footer id="footer">
-				<!-- Go top button -->
-				<div id="go-top"><a class="smoothscroll" href="#home"><i class="fas fa-arrow-circle-up fa-3x"></i></a></div>
+		<footer id="footer">
+			<!-- Go top button -->
+			<div id="go-top"><a class="smoothscroll" href="#home"><i class="fas fa-arrow-circle-up fa-3x"></i></a></div>
 
-				<!-- Icons -->
-					<!-- <ul class="actions">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
-					</ul> -->
+			<!-- Icons -->
+			<!-- <ul class="actions">
+				<li><a href="#" class="fab fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="fab fa-facebook"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="fab fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="fab fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+				<li><a href="#" class="fab fa-dribbble"><span class="label">Dribbble</span></a></li>
+				<li><a href="#" class="fab fa-pinterest"><span class="label">Pinterest</span></a></li>
+			</ul> -->
 
-				<!-- Menu -->
-					<ul class="menu">
-						<li>&copy; Suk Yee Yong &middot; All rights reserved 2021 &middot; Design: <a href="https://html5up.net">HTML5 UP</a> & Suk Yee Yong</li>
-						<!-- <li>&copy; Suk Yee Yong</li><li>All rights reserved 2021</li><li>Designed by Suk Yee Yong</li><li>Powered by <a href="https://html5up.net">HTML5 UP</a></li> -->
-					</ul>
-
-			</footer>
+			<!-- Menu -->
+			<ul class="menu">
+				<li>&copy; Suk Yee Yong &middot; All rights reserved 2023 &middot; Design: <a href="https://html5up.net" target="_blank">HTML5 UP</a> & Suk Yee Yong</li>
+			</ul>
+		</footer>
 
 		<!-- Scripts -->
-			<script src="assets/js/darkmodetoggle.js"></script>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+		<script src="assets/js/darkmodetoggle.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.poptrox.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets/js/main.js"></script>
 
 	</body>
 </html>
