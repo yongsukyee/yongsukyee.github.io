@@ -1,0 +1,1292 @@
+/* ==========================================================================
+   main.css — Suk Yee Yong, personal site.
+
+   @author  Suk Yee Yong
+   Copyright (c) 2026 Suk Yee Yong. All rights reserved.
+
+   The colour system and design rules are documented in STYLE_RULES.CLAUDE.md.
+
+     1.  Design tokens (palette · both themes)
+     2.  Reset + base
+     3.  Typography + colour system
+     4.  Layout — header / sections / footer
+     5.  Buttons + the section "next" arrow
+     6.  Cards + glass box surface
+     7.  Stardust background
+     8.  Project showcase — control deck (search + tag chips)
+     9.  Project showcase — card grid
+     10. Project showcase — modal
+     11. About — whoami terminal + compact timeline
+     12. Research — pipeline knowledge graph
+     13. Contact — unified ID card + theme toggle
+     14. Scroll-reveal motion
+     15. Responsive + reduced motion
+   ========================================================================== */
+
+/* Body font (Inter) is loaded in index.html <head>; the system-font stack in
+   `font-family` below takes over if it fails. FontAwesome is self-hosted: */
+@import url("fontawesome-all.css");
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+	--cb-yellow: rgb(240, 228, 66);     /* theme-toggle hover accent */
+	--mono: ui-monospace, "SFMono-Regular", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* LIGHT theme (body.light) */
+body.light {
+	--bg: #e9e6f6;                         /* page base behind stardust    */
+	--surface: rgba(255, 255, 255, 0.42);  /* project cards + UI chrome (translucent) */
+	--surface-box: rgba(255, 255, 255, 0.55); /* About/Research/Contact panels — readable, stardust shows faintly */
+	--surface-solid: #f4f1fb;              /* modal panel — opaque, lavender-tinted (matches theme, not stark white) */
+	--text: #2c2740;                       /* slate-indigo                 */
+	--text-soft: #6a6385;                  /* comment-like / optional      */
+	--heading-strong: #a85005;             /* deepest burnt marigold — h1 brand (top of ladder, ~4.4:1) */
+	--heading: #b35707;                    /* deep marigold — h2 section headers (AA-large ~4.1:1) */
+	--heading-sub: #bd7016;                /* gold-orange — h3 sub-headers (AA-large ~3.2:1) */
+	--link: #6f63c9;                       /* periwinkle — decorative theme marks */
+	--link-rgb: 111, 99, 201;              /* periwinkle channels (glows)  */
+	--accent: #2f9e90;                     /* teal — interaction (borders, glows, dividers) */
+	--accent-rgb: 47, 158, 144;            /* teal channels (glows)        */
+	--accent-text: #1c5f57;                /* teal for TEXT on pale surfaces — deep enough to pass AA (the bright --accent is only ~2.7:1 as text) */
+	--btn-hover: #23766c;                  /* deep teal: keeps white text crisp on hover (white ~5.4:1) */
+	--border: rgba(42, 37, 64, 0.14);
+
+	/* per-section tints: same hue, monotonic top→bottom (darker near the
+	   hero, lightening as you scroll). Constant alpha so only lightness
+	   steps; stardust shows through (the band has NO backdrop blur, so its
+	   stars stay crisp — that's why the background reads as transparent). */
+	--section-a: rgba(196, 186, 232, 0.52); /* about    (darkest)  */
+	--section-b: rgba(211, 203, 238, 0.52); /* research            */
+	--section-c: rgba(225, 219, 244, 0.52); /* project             */
+	--section-d: rgba(238, 234, 250, 0.52); /* contact  (lightest) */
+	--header-bg: rgba(243, 241, 252, 0.82);
+	--footer-bg: #d7d0ec;                  /* lavender anchor band, a touch deeper than the lightest section */
+	--footer-text: #4a4463;                /* slate-indigo, dark-on-light */
+
+	--toggle-hover: #e0a200;               /* deep amber — sun icon readable on the pale header */
+	--toggle-glow: rgba(224, 162, 0, 0.55);
+	--star: rgba(99, 83, 207, 0.70);
+	--star-dim: rgba(99, 83, 207, 0.34);   /* faint background stars (depth) */
+	--star-accent: rgba(38, 140, 127, 0.65);
+	--twinkle: rgba(124, 111, 224, 0.95);
+	--nebula: rgba(124, 111, 224, 0.10);   /* soft Milky-Way band */
+}
+
+/* DARK theme — the default (no body class) */
+body:not(.light) {
+	--bg: #100d18;
+	--surface: rgba(58, 50, 82, 0.38);     /* project cards + UI chrome (translucent) */
+	--surface-box: rgba(58, 50, 82, 0.50); /* About/Research/Contact panels — readable, stardust shows faintly */
+	--surface-solid: #241f33;              /* modal panel — opaque, deep violet (same surface family) */
+	--text: #e8e4f3;
+	--text-soft: #b1a9c9;
+	--heading-strong: #e07e16;             /* deepest burnt marigold — h1 brand (darker than h2, top of ladder) */
+	--heading: #f59e2e;                    /* marigold — h2 section headers (saturated, glows on indigo) */
+	--heading-sub: #f9c68a;                /* light gold-orange — h3 sub-headers (clear step up in lightness) */
+	--link: #9a8ff0;                       /* periwinkle — decorative theme marks */
+	--link-rgb: 154, 143, 240;             /* periwinkle channels (glows)  */
+	--accent: #3bbfac;                     /* teal — interaction           */
+	--accent-rgb: 59, 191, 172;            /* teal channels (glows)        */
+	--accent-text: #3bbfac;                /* bright teal already reads as text on the dark surface (~6.7:1) */
+	--btn-hover: #1f6a60;                  /* deep teal: white text stays legible on hover (~6.4:1) */
+	--border: rgba(232, 228, 243, 0.16);
+
+	--section-a: rgba(28, 23, 40, 0.55);
+	--section-b: rgba(36, 30, 52, 0.55);
+	--section-c: rgba(44, 37, 63, 0.55);
+	--section-d: rgba(52, 44, 74, 0.55);
+	--header-bg: rgba(18, 15, 26, 0.82);
+	--footer-bg: #0c0a12;
+	--footer-text: var(--text-soft);       /* dark mode: the body grey already reads on the dark footer */
+
+	--toggle-hover: var(--cb-yellow);        /* bright yellow — pops on the dark header */
+	--toggle-glow: rgba(240, 228, 66, 0.6);
+	--star: rgba(255, 255, 255, 0.70);
+	--star-dim: rgba(255, 255, 255, 0.30);   /* faint background stars (depth) */
+	--star-accent: rgba(154, 143, 240, 0.80);
+	--twinkle: rgba(255, 255, 255, 0.95);
+	--nebula: rgba(154, 143, 240, 0.10);     /* soft Milky-Way band */
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset + base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ul, ol, li,
+article, aside, figure, figcaption, footer, header, nav, section, iframe,
+form, label, input, textarea, button {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, figure, figcaption, footer, header, nav, section { display: block; }
+ul, ol { list-style: none; }
+
+html {
+	height: 100%;
+	background: var(--bg);
+	scroll-behavior: smooth;
+	scroll-padding-top: 3em;          /* clear the fixed header on anchor jumps */
+	/* Reserve matching gutters on BOTH edges for the scrollbar, so centred
+	   content stays visually centred instead of getting pinched against the
+	   right-hand scrollbar. */
+	scrollbar-gutter: stable both-edges;
+}
+
+body {
+	min-width: 320px;
+	min-height: 100%;
+	padding-top: 3em;                 /* reserve fixed-header height */
+	background: transparent;          /* let the fixed stardust layer show through */
+	-webkit-text-size-adjust: none;
+}
+
+/* --------------------------------------------------------------------------
+   3. Typography + colour system
+   -------------------------------------------------------------------------- */
+body, input, textarea, select, button {
+	font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	font-weight: 400;
+	font-size: 15pt;
+	line-height: 1.65em;
+	letter-spacing: 0.01em;
+	color: var(--text);
+}
+
+/* Responsive base scale — everything else is em-relative to this */
+@media screen and (max-width: 1680px) { body, input, textarea, select, button { font-size: 14pt; } }
+@media screen and (max-width: 1280px) { body, input, textarea, select, button { font-size: 13pt; } }
+@media screen and (max-width: 736px)  { body, input, textarea, select, button { font-size: 12pt; line-height: 1.55em; } }
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 900;
+	letter-spacing: -0.0325em;
+	color: var(--text);
+}
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { color: inherit; text-decoration: none; }
+
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+sub { position: relative; top: 0.5em; font-size: 0.8em; }
+sup { position: relative; top: -0.5em; font-size: 0.8em; }
+
+p { margin-bottom: 1em; line-height: 1.65; }
+
+/* Links: same colour as body text at rest (dotted underline), teal on hover.
+   Teal is the single interaction colour. */
+a {
+	color: var(--text);
+	text-decoration: none;
+	text-decoration-style: dotted;
+	transition: color 0.2s ease-in-out;
+}
+/* Inline text links only — `:not(.button)` so the generic hover (teal text +
+   underline) doesn't override the .button hover (white text on a teal fill). */
+.content a:not(.button), p a:not(.button), li a:not(.button) { text-decoration: underline dotted; }
+.content a:not(.button):hover, p a:not(.button):hover, li a:not(.button):hover { color: var(--accent-text); text-decoration: underline; }
+
+/* Section headers (h2) — marigold */
+.section-head h2,
+.hero h2,
+.box h2 { color: var(--heading); }
+.section-head h2 { font-size: 2em; line-height: 1.25; }
+
+/* Sub-headers (h3) — soft marigold (same family, one level softer) */
+.section h3 { color: var(--heading-sub); font-size: 1.2em; line-height: 1.35; }
+
+/* Card title — content/data label, strong body text (NOT a heading) */
+.card-title { color: var(--text); font-weight: 400; }
+/* Modal title — the heading of the opened view → gold-orange sub-header */
+.modal-title { color: var(--heading-sub); font-weight: 700; }
+
+/* Optional / secondary text — muted grey */
+.section-lead,
+.modal-collab { color: var(--text-soft); }
+.section-lead { font-size: 0.95em; margin-top: -0.4em; }
+
+/* --------------------------------------------------------------------------
+   4. Layout — header / sections / footer
+   -------------------------------------------------------------------------- */
+/* Fixed translucent header */
+#header {
+	position: fixed;
+	z-index: 10000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3em;
+	line-height: 3em;
+	background: var(--header-bg);
+	box-shadow: 0 1px 0 var(--border);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+}
+#header h1 {
+	position: absolute;
+	left: 1em;
+	top: 0;
+	height: 3em;
+	line-height: 3em;
+}
+.brand {
+	display: inline-flex;
+	align-items: center;
+	font-size: 1.25em;
+	color: var(--heading-strong);     /* h1 brand — top of the warm heading ladder */
+}
+.brand-avatar {
+	width: 1.6em;
+	height: 1.6em;
+	border-radius: 50%;
+	border: 1px solid var(--border);
+	margin-right: 0.45em;
+}
+#header nav {
+	position: absolute;
+	right: 1.5em;
+	top: 0;
+	height: 3em;
+	line-height: 3em;
+}
+#header nav ul li {
+	display: inline-block;
+	margin-left: 0.5em;
+	font-size: 0.9em;
+	font-weight: 700;
+}
+#header nav ul li a {
+	display: block;
+	height: 3em;
+	line-height: 3em;
+	padding: 0 0.5em;
+	color: var(--text);
+}
+#header nav ul li a:hover { color: var(--accent); }
+
+@media screen and (max-width: 736px) {
+	html { scroll-padding-top: 2.5em; }
+	body { padding-top: 2.5em; }
+	#header { height: 2.5em; line-height: 2.5em; }
+	#header h1 { position: relative; left: 0; text-align: center; width: 100%; height: 2.5em; line-height: 2.5em; }
+	#header nav { display: none; }
+}
+
+/* Section scaffold */
+.section {
+	position: relative;
+	text-align: center;
+	padding: 3.25em 0 5.5em;          /* bottom room for the anchored next-arrow */
+	overflow-x: hidden;
+}
+.content {
+	width: min(84rem, 94vw);
+	max-width: 94vw;
+	margin: 0 auto;
+}
+.section-head { margin-bottom: 2em; }
+
+/* Per-section background tints: each section is a distinct step in the lavender
+   ladder (deepest near the hero, lightening toward the footer). The teal dividers
+   below give the clear separation between these steps. */
+#about    { background: var(--section-a); }
+#research { background: var(--section-b); }
+#project  { background: var(--section-c); }
+#contact  { background: var(--section-d); padding-bottom: 4em; }  /* room for the footer's back-to-top tab */
+
+/* Glowing accent divider between stacked sections (incl. home → about) */
+#home + #about,
+#about + #research,
+#research + #project,
+#project + #contact {
+	border-top: 1px solid var(--accent);
+	box-shadow: inset 0 1px 0 rgba(var(--accent-rgb), 0.30);
+}
+
+/* Home hero — full-screen centred, stardust shines through */
+.hero {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: calc(100vh - 3em);
+	padding: 3em 0;
+	text-align: center;
+	background:
+		radial-gradient(ellipse 100% 75% at 50% 18%, rgba(var(--link-rgb), 0.18) 0%, transparent 60%);
+}
+.hero h2 { font-size: 4em; line-height: 1.05; letter-spacing: 0.01em; }
+.home-tagline {
+	margin: 0.6em 0 1.4em;
+	color: var(--text-soft);
+	font-size: 1.05em;
+	letter-spacing: 0.02em;
+}
+
+/* Home entrance — a "cosmic arrival" on page load: the name settles in from a
+   blurred, slightly-scaled state, then the tagline and button follow in turn.
+   Plays once on load (not scroll-tied), so it greets every visitor. */
+.hero h2 {
+	animation: hero-name 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.home-tagline {
+	animation: hero-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+.hero .button {
+	animation: hero-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+@keyframes hero-name {
+	from { opacity: 0; transform: translateY(22px) scale(0.94); filter: blur(10px); letter-spacing: 0.18em; }
+	to   { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); letter-spacing: 0.01em; }
+}
+@keyframes hero-rise {
+	from { opacity: 0; transform: translateY(16px); filter: blur(4px); }
+	to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* About — a single boxed content panel, pulled toward centre */
+#about { display: flex; align-items: center; justify-content: center; }
+
+/* Footer */
+#footer {
+	position: relative;
+	height: 3.5em;
+	line-height: 3.5em;
+	background: var(--footer-bg);
+	color: var(--footer-text);
+}
+#footer .menu {
+	position: absolute;
+	right: 2em;
+	top: 0;
+	height: 3.5em;
+	line-height: 3.5em;
+}
+#footer .menu li { font-size: 0.9em; }
+#footer .menu a { color: var(--footer-text); }
+#footer .menu a:hover { color: var(--accent); }
+
+/* "Back to top" arrow — same glass-tab treatment as the section "next" arrows,
+   mirrored to point up. Sits at the footer's top edge (no overlap with the
+   contact box above). */
+.top-arrow {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	width: 4em;
+	height: 2.4em;
+	margin-left: -2em;
+	transform: translateY(-100%);     /* perch the tab above the footer's top edge */
+	border: 1px solid var(--border);
+	border-bottom: 0;
+	border-radius: 1.4em 1.4em 0 0;
+	background-color: rgba(var(--accent-rgb), 0.16);
+	background-image: url("images/arrow-up-accent.svg");
+	background-position: center 45%;
+	background-repeat: no-repeat;
+	background-size: 34% auto;
+	text-indent: -9999px;
+	overflow: hidden;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.top-arrow:hover {
+	background-color: rgba(var(--accent-rgb), 0.42);
+	border-color: var(--accent);
+}
+
+@media screen and (max-width: 1000px) {
+	#footer {
+		height: auto;
+		line-height: inherit;
+		text-align: center;
+		padding: 2.5em 1em 2em;
+	}
+	#footer .menu { position: relative; right: 0; top: 0; height: auto; line-height: 1.6em; }
+}
+
+/* --------------------------------------------------------------------------
+   5. Buttons + the section "next" arrow
+   -------------------------------------------------------------------------- */
+/* Soft-solid button: gentle teal-tinted fill + firm teal edge and a subtle
+   resting glow for presence; hover fills with the deeper teal (--btn-hover)
+   with white text. Teal TEXT uses --accent-text so it clears AA on pale
+   surfaces. One style, used everywhere (hero, projects, about, contact). */
+.button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5em;
+	font-size: 0.85em;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	text-decoration: none;
+	text-align: center;
+	padding: 0.75em 1.4em;
+	color: var(--accent-text);
+	background: rgba(var(--accent-rgb), 0.14);
+	border: 1.5px solid rgba(var(--accent-rgb), 0.55);
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.18);
+	cursor: pointer;
+	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.button:hover,
+.button:active {
+	color: #fff;
+	background: var(--btn-hover);
+	border-color: var(--btn-hover);
+	box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.4);
+}
+.button i { margin-right: 0; }
+
+/* Section "next" arrow — white chevron on subtle tinted glass that firms up on hover */
+.next-arrow {
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	width: 4em;
+	height: 2.4em;
+	margin-left: -2em;
+	border: 1px solid var(--border);
+	border-bottom: 0;
+	border-radius: 1.4em 1.4em 0 0;
+	background-color: rgba(var(--accent-rgb), 0.16);
+	background-image: url("images/arrow-accent.svg");
+	background-position: center 55%;
+	background-repeat: no-repeat;
+	background-size: 34% auto;
+	text-indent: -9999px;
+	overflow: hidden;
+	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(6px);
+	transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.next-arrow:hover {
+	background-color: rgba(var(--accent-rgb), 0.42);
+	border-color: var(--accent);
+}
+@media screen and (max-width: 736px) { .next-arrow { display: none; } }
+
+/* --------------------------------------------------------------------------
+   6. Cards + glass box surface
+   -------------------------------------------------------------------------- */
+/* Surface shared by boxes + project cards */
+.box,
+.card {
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+/* Project cards ARE frosted glass (blur smears the stardust into a soft sheen
+   behind the thumbnail — the look the user signed off on). */
+.card {
+	background: var(--surface);
+	-webkit-backdrop-filter: blur(10px) saturate(120%);
+	backdrop-filter: blur(10px) saturate(120%);
+}
+/* About/Research/Contact text panels: NO backdrop blur. The blur was what made
+   them read as opaque — it smears the sparse stars into a flat milky haze no
+   matter how low the alpha is. Without it (like the section band, which never
+   blurs) the crisp stardust shows straight through the translucent fill. */
+.box { background: var(--surface-box); padding: 2.5em; text-align: left; }
+@media screen and (max-width: 736px) { .box { padding: 1.5em 1.25em; } }
+
+
+/* --------------------------------------------------------------------------
+   7. Stardust background (pure CSS, GPU-friendly, no images / no JS)
+   -------------------------------------------------------------------------- */
+.stardust {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background-color: var(--bg);
+	background-image:
+		/* soft diagonal Milky-Way band — a faint cosmos glow behind the stars */
+		linear-gradient(118deg, transparent 32%, var(--nebula) 46%, var(--nebula) 54%, transparent 68%),
+		/* a few BRIGHT foreground stars (sparse — large tiles = few per screen) */
+		radial-gradient(2.4px 2.4px at 20% 30%, var(--star) 60%, transparent 62%),
+		radial-gradient(2px 2px at 70% 60%, var(--star) 60%, transparent 62%),
+		radial-gradient(2.6px 2.6px at 40% 80%, var(--star-accent) 60%, transparent 62%),
+		radial-gradient(2px 2px at 90% 22%, var(--star) 60%, transparent 62%),
+		/* DIM distant stars — denser + fainter, give the field real depth */
+		radial-gradient(1.3px 1.3px at 12% 68%, var(--star-dim) 60%, transparent 62%),
+		radial-gradient(1.3px 1.3px at 55% 15%, var(--star-dim) 60%, transparent 62%),
+		radial-gradient(1.5px 1.5px at 33% 50%, var(--star-dim) 60%, transparent 62%),
+		radial-gradient(1.3px 1.3px at 82% 78%, var(--star-dim) 60%, transparent 62%);
+	background-repeat:
+		no-repeat,
+		repeat, repeat, repeat, repeat,
+		repeat, repeat, repeat, repeat;
+	background-size:
+		100% 100%,
+		300px 300px, 340px 340px, 380px 380px, 280px 280px,
+		170px 170px, 200px 200px, 150px 150px, 190px 190px;
+	will-change: background-position;
+	animation: stardust-drift 150s linear infinite;
+}
+/* Parallax: the dim/far field drifts slower than the bright/near stars, and the
+   nebula band barely moves — sells the sense of real cosmic depth. */
+@keyframes stardust-drift {
+	from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+	to   { background-position:
+		60px 90px,
+		420px 700px, -540px 480px, 660px -560px, 360px 620px,
+		-240px 220px, 280px 270px, -165px 290px, 225px -210px; }
+}
+
+/* Twinkle: two speck layers pulsing 0↔1 on offset timers, so individual
+   stars blink at different moments (a uniform whole-field pulse is invisible). */
+.stardust::before,
+.stardust::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	animation: stardust-twinkle 6s ease-in-out infinite;
+}
+.stardust::before {
+	background-image:
+		radial-gradient(2.6px 2.6px at 18% 24%, var(--twinkle) 55%, transparent 60%),
+		radial-gradient(3px 3px at 62% 18%, var(--twinkle) 55%, transparent 60%),
+		radial-gradient(2.4px 2.4px at 88% 52%, var(--twinkle) 55%, transparent 60%),
+		radial-gradient(2.8px 2.8px at 40% 70%, var(--twinkle) 55%, transparent 60%);
+	background-size: 300px 300px, 360px 360px, 320px 320px, 400px 400px;
+}
+.stardust::after {
+	background-image:
+		radial-gradient(2.6px 2.6px at 78% 30%, var(--twinkle) 55%, transparent 60%),
+		radial-gradient(3px 3px at 30% 44%, var(--twinkle) 55%, transparent 60%),
+		radial-gradient(2.4px 2.4px at 55% 82%, var(--twinkle) 55%, transparent 60%),
+		radial-gradient(2.8px 2.8px at 12% 88%, var(--twinkle) 55%, transparent 60%);
+	background-size: 340px 340px, 300px 300px, 380px 380px, 320px 320px;
+	animation-delay: 3s;
+}
+/* Gentle shimmer — never fully off, never a hard flash. */
+@keyframes stardust-twinkle {
+	0%, 100% { opacity: 0.15; }
+	50%      { opacity: 0.9; }
+}
+
+/* --------------------------------------------------------------------------
+   8. Project showcase — control deck (search + tag chips)
+   -------------------------------------------------------------------------- */
+#project .content { width: min(92rem, 94vw); }
+
+.project-controls {
+	width: 100%;
+	margin: 0 auto 2em;
+	display: flex;
+	flex-direction: column;
+	gap: 1.1em;
+	text-align: left;
+}
+.project-search-row {
+	display: flex;
+	align-items: stretch;
+	gap: 0.75em;
+	flex-wrap: wrap;
+}
+
+/* Terminal-style search: "›" prefix + custom blinking block caret */
+.project-search-wrap {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 0.55em;
+	flex: 1 1 320px;
+	max-width: 560px;
+	padding: 0.4em 0.95em;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-left: 2px solid var(--accent);
+	border-radius: 6px;
+	font-family: var(--mono);
+}
+.project-search-wrap::before {
+	content: "›";
+	color: var(--accent);
+	font-size: 1.5rem;
+	font-weight: 700;
+	line-height: 1;
+}
+#project-search {
+	flex: 1;
+	font-family: var(--mono);
+	font-size: 1rem;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	color: var(--text);
+	background: transparent;
+	padding: 0.1em 0;
+	outline: none;
+	caret-color: transparent;          /* native caret hidden; we draw our own */
+}
+#project-search::placeholder { color: var(--text-soft); font-weight: 400; }
+
+/* Custom robotic block caret (positioned by projects-render.js) */
+.search-caret {
+	position: absolute;
+	top: 50%;
+	width: 0.8ch;
+	height: 1.15em;
+	transform: translateY(-50%);
+	background: var(--accent);
+	box-shadow: 0 0 8px var(--accent);
+	opacity: 0;
+	pointer-events: none;
+}
+.search-caret.is-active { animation: caret-blink 1.05s steps(1, end) infinite; }
+@keyframes caret-blink {
+	0%, 50%      { opacity: 1; }
+	50.01%, 100% { opacity: 0; }
+}
+/* Off-screen mirror that measures text width up to the caret */
+.search-mirror {
+	position: absolute;
+	visibility: hidden;
+	white-space: pre;
+	font-family: var(--mono);
+	font-size: 1rem;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	pointer-events: none;
+}
+
+/* Clear control beside the search box */
+.tag-clear {
+	font-family: var(--mono);
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	padding: 0 1.1em;
+	color: var(--text-soft);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.tag-clear:hover {
+	color: var(--accent);
+	border-color: var(--accent);
+	box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.3);
+}
+
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.7em 0.55em; }
+
+/* Robotic keyword pills */
+.tag-chip {
+	display: inline-flex;
+	align-items: center;
+	font-family: var(--mono);
+	font-size: 0.85rem;
+	font-weight: 500;
+	line-height: 1;
+	letter-spacing: 0.02em;
+	text-transform: lowercase;
+	padding: 0.7em 0.85em;
+	color: var(--text-soft);
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	cursor: pointer;
+	transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.tag-chip:hover {
+	color: var(--text);
+	border-color: var(--accent);
+	box-shadow: 0 0 0 1px var(--accent), 0 0 10px rgba(var(--accent-rgb), 0.35);
+}
+.tag-chip.active {
+	color: #fff;
+	background: var(--accent);
+	border-color: var(--accent);
+	box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.5);
+}
+.tag-chip.active::before { content: "▸ "; }
+
+/* --------------------------------------------------------------------------
+   9. Project showcase — card grid
+   -------------------------------------------------------------------------- */
+.project-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 1.4rem;
+	width: 100%;
+	margin: 0 auto 2em;
+}
+
+.project-card {
+	position: relative;
+	text-align: left;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: 14px;
+	overflow: hidden;
+	cursor: pointer;
+	-webkit-backdrop-filter: blur(12px) saturate(120%);
+	backdrop-filter: blur(12px) saturate(120%);
+	transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+	animation: card-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.project-card:nth-child(3n+2) { animation-delay: 0.1s; }
+.project-card:nth-child(3n+3) { animation-delay: 0.2s; }
+.project-card:hover,
+.project-card:focus-visible {
+	transform: translateY(-6px);
+	border-color: var(--accent);
+	box-shadow:
+		0 0 0 1px var(--accent),
+		0 0 22px rgba(var(--accent-rgb), 0.55),
+		0 16px 40px rgba(var(--accent-rgb), 0.4);
+	outline: none;
+}
+@keyframes card-in {
+	from { opacity: 0; transform: translateY(12px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Show the full figure (scientific plots) — contain, not crop */
+.card-media {
+	position: relative;
+	aspect-ratio: 16 / 10;
+	overflow: hidden;
+	background: linear-gradient(135deg, rgba(var(--link-rgb), 0.12), rgba(var(--accent-rgb), 0.10));
+}
+.card-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+	padding: 0.4em;
+	transition: transform 0.4s ease;
+}
+.project-card:hover .card-media img { transform: scale(1.04); }
+
+/* Title overlaid on the image bottom, on a glass scrim so it reads over ANY
+   plot (incl. light-background figures) without fading the whole image. */
+.card-overlay {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 2;
+	padding: 1.4em 0.95em 0.6em;
+	background: linear-gradient(to top,
+		rgba(8, 6, 16, 0.9) 0%,
+		rgba(8, 6, 16, 0.62) 52%,
+		rgba(8, 6, 16, 0) 100%);
+	-webkit-backdrop-filter: blur(2px);
+	backdrop-filter: blur(2px);
+	pointer-events: none;
+}
+.card-title {
+	margin: 0;
+	font-size: 0.92em;
+	line-height: 1.28;
+	font-weight: 600;
+	color: #fff;
+	text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+	/* keep cards uniform: clamp to two lines */
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+.project-card:hover .card-title { text-shadow: 0 1px 10px rgba(var(--accent-rgb), 0.7); }
+
+/* Slim foot: year + smaller keyword chips */
+.card-foot {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.35em;
+	padding: 0.55em 0.8em 0.65em;
+}
+
+/* Monospace metadata chips. Three non-interactive tiers (teal stays reserved
+   for buttons + links): YEAR = periwinkle-framed + glow; KEYWORD = quiet grey.
+   Both use body-text colour so small uppercase text clears AA (coloured text
+   on a coloured tint failed it). */
+.chip {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	font-weight: 500;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	white-space: nowrap;
+	padding: 0em 0.65em;
+	color: var(--text);
+	background: rgba(127, 127, 140, 0.12);   /* neutral grey, not periwinkle */
+	border: 1px solid var(--border);
+	border-radius: 4px;
+}
+/* Foot-strip chips: smaller + lighter than default, so the card reads compact */
+.card-foot .chip {
+	font-size: 0.64rem;
+	padding: 0.05em 0.5em;
+}
+/* Year chip: periwinkle border + glow carry the "year tier" signal; the number
+   itself stays high-contrast body text. */
+.chip-year {
+	color: var(--text);
+	font-weight: 600;
+	border: 1px solid rgba(var(--link-rgb), 0.60);
+	background: rgba(var(--link-rgb), 0.16);
+	box-shadow: 0 0 6px rgba(var(--link-rgb), 0.16);
+}
+
+/* HUD corner brackets */
+.corner {
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	border: 2px solid var(--accent);
+	opacity: 0;
+	transition: opacity 0.25s ease;
+	pointer-events: none;
+	z-index: 2;
+}
+.corner-tl { top: 8px; left: 8px; border-right: 0; border-bottom: 0; }
+.corner-tr { top: 8px; right: 8px; border-left: 0; border-bottom: 0; }
+.corner-bl { bottom: 8px; left: 8px; border-right: 0; border-top: 0; }
+.corner-br { bottom: 8px; right: 8px; border-left: 0; border-top: 0; }
+.project-card:hover .corner,
+.project-card:focus-visible .corner { opacity: 1; box-shadow: 0 0 6px var(--accent); }
+
+.project-empty {
+	margin: 1em 0 2em;
+	font-family: var(--mono);
+	font-size: 0.85rem;
+	color: var(--text-soft);
+	text-align: left;
+}
+
+/* "Related projects" context banner — appears after a jump from the Research graph.
+   Narrow (fits its content), slim (search-box height); keywords shown as chips. */
+.project-related {
+	display: inline-flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.5em;
+	max-width: 100%;
+	margin: 0 0 1.5em;
+	padding: 0.4em 0.7em;
+	font-family: var(--mono);
+	font-size: 0.78rem;
+	color: var(--text);
+	background: rgba(var(--accent-rgb), 0.10);
+	border: 1px solid var(--border);
+	border-left: 2px solid var(--accent);
+	border-radius: 6px;
+	text-align: left;
+}
+.project-related[hidden] { display: none; }
+.project-related .pr-chips { display: inline-flex; flex-wrap: wrap; gap: 0.35em; }
+.project-related .pr-clear {
+	margin-left: 1.2em;     /* clear gap after the chips */
+	font-family: var(--mono);
+	font-size: 0.85rem;
+	line-height: 1;
+	padding: 0.2em 0.55em;
+	color: var(--accent-text);
+	background: transparent;
+	border: 1px solid var(--accent);
+	border-radius: 5px;
+	cursor: pointer;
+	transition: color 0.2s ease, background-color 0.2s ease;
+}
+.project-related .pr-clear:hover { color: #fff; background: var(--btn-hover); }
+
+/* --------------------------------------------------------------------------
+   10. Project showcase — modal
+   -------------------------------------------------------------------------- */
+.project-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1.5em;
+	background: rgba(10, 8, 16, 0.7);
+	-webkit-backdrop-filter: blur(4px);
+	backdrop-filter: blur(4px);
+}
+.project-modal[hidden] { display: none; }
+body.modal-open { overflow: hidden; }
+
+.modal-panel {
+	position: relative;
+	width: min(72rem, 94vw);
+	max-width: 94vw;
+	max-height: 90vh;
+	overflow: auto;
+	padding: 2.4em 2.8em;
+	background: var(--surface-solid);
+	color: var(--text);
+	border: 1px solid var(--border);
+	border-top: 3px solid var(--accent);
+	border-radius: 14px;
+	box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+	animation: modal-open 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes modal-open {
+	from { opacity: 0; transform: translateY(14px) scale(0.97); }
+	to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-media {
+	margin: 0.4em 0 1.2em;
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px solid var(--border);
+	background: linear-gradient(135deg, rgba(var(--link-rgb), 0.12), rgba(var(--accent-rgb), 0.10));
+}
+.modal-img {
+	display: block;
+	width: 100%;
+	max-height: 46vh;
+	object-fit: contain;
+	padding: 0.6em;
+}
+
+/* Replay the content fade when navigating prev/next */
+.modal-swap .modal-img,
+.modal-swap .modal-title,
+.modal-swap .modal-abstract,
+.modal-swap .modal-links,
+.modal-swap .modal-tags { animation: modal-content-in 0.3s ease both; }
+@keyframes modal-content-in {
+	from { opacity: 0; transform: translateY(6px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+.modal-year { display: inline-block; margin-bottom: 0.7em; }
+.modal-title { margin: 0 0 0.5em; font-size: 1.5em; line-height: 1.3; }
+.modal-collab { margin: 0 0 1em; font-size: 0.82em; }
+.modal-collab a { color: var(--text); text-decoration-style: dotted; }
+.modal-collab a:hover { color: var(--accent); }
+.modal-abstract { margin: 0; font-size: 0.95em; line-height: 1.65; color: var(--text); }
+
+.modal-links { display: flex; flex-wrap: wrap; gap: 0.6em; margin: 1.3em 0 1em; }
+/* Same soft-solid treatment as the site .button (just mono + smaller), so the
+   modal links match every other button. */
+.modal-link {
+	font-family: var(--mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	padding: 0.35em 1.1em;
+	color: var(--accent-text);
+	background: rgba(var(--accent-rgb), 0.14);
+	border: 1.5px solid rgba(var(--accent-rgb), 0.55);
+	border-radius: 6px;
+	text-decoration: none;
+	transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.modal-link:hover {
+	color: #fff;
+	background: var(--btn-hover);
+	border-color: var(--btn-hover);
+	box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.4);
+}
+.modal-tags { display: flex; flex-wrap: wrap; gap: 0.4em; }
+
+/* Modal close + prev/next: identical bordered squares in one row, teal hover.
+   Same size + same top; evenly spaced right→left so ‹ › never overlap ✕. */
+.modal-close,
+.modal-nav {
+	position: absolute;
+	top: 0.95em;
+	width: 1.8em;
+	height: 1.8em;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	font-size: 1.1em;
+	line-height: 1;
+	color: var(--text-soft);
+	background: transparent;
+	border: 1px solid var(--border);
+	border-radius: 5px;
+	cursor: pointer;
+	transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.modal-nav { font-family: var(--mono); }
+.modal-close:hover,
+.modal-nav:hover {
+	color: var(--accent);
+	border-color: var(--accent);
+	box-shadow: 0 0 10px rgba(var(--accent-rgb), 0.35);
+}
+.modal-nav[hidden] { display: none; }
+.modal-close { right: 0.85em; }
+.modal-next  { right: 3.95em; }   /* 0.85 + 1.8 box + 1.3 gap (extra room past ✕) */
+.modal-prev  { right: 6.05em; }   /* 3.95 + 1.8 box + 0.3 gap */
+
+/* --------------------------------------------------------------------------
+   11. About — whoami terminal + compact timeline
+   -------------------------------------------------------------------------- */
+#about .content { text-align: left; }
+
+/* Shared "console" chrome (terminal + ID badge use the same title bar) */
+.term, .idbadge {
+	background: var(--surface-solid); border: 1px solid var(--border);
+	border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18); text-align: left;
+}
+.term-bar {
+	display: flex; align-items: center; gap: 0.6em; padding: 0.55em 1em;
+	background: rgba(var(--link-rgb), 0.10); border-bottom: 1px solid var(--border);
+	font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.05em; color: var(--text-soft);
+}
+.term-dots { display: inline-flex; gap: 0.4em; }
+.term-dots i { width: 0.7em; height: 0.7em; border-radius: 50%; display: inline-block; }
+.term-dots i:nth-child(1) { background: #e0696e; }
+.term-dots i:nth-child(2) { background: #e0a200; }
+.term-dots i:nth-child(3) { background: var(--accent); }
+.term-title { opacity: 0.85; }
+
+.term { font-family: var(--mono); margin: 0 0 1.8em; }
+.term-body { padding: 1.05em 1.3em; font-size: 0.92rem; line-height: 1.85; }
+.term-prompt { color: var(--accent-text); }
+.term-prompt::before { content: "$ "; color: var(--text-soft); }
+.term-row { white-space: pre-wrap; }
+.term-key { display: inline-block; min-width: 5em; color: var(--link); }
+.term-key::after { content: ":"; color: var(--text-soft); }
+.term-val { color: var(--text); }
+.term-status .dot { color: var(--accent); }
+
+.cv-row { margin: 0 0 1.8em; }
+
+/* Compact career timeline: glowing nodes on a teal→periwinkle spine */
+.timeline { position: relative; margin: 0; padding-left: 1.9em; }
+.timeline::before {
+	content: ""; position: absolute; left: 0.42em; top: 0.5em; bottom: 0.5em; width: 2px;
+	background: linear-gradient(to bottom, rgba(var(--accent-rgb), 0.1), rgba(var(--accent-rgb), 0.65) 14%, rgba(var(--link-rgb), 0.65) 86%, rgba(var(--link-rgb), 0.1));
+}
+.tl-item { position: relative; margin-bottom: 0.85em; }
+.tl-item:last-child { margin-bottom: 0; }
+.tl-item::before {
+	content: ""; position: absolute; left: -1.62em; top: 0.85em; width: 0.7em; height: 0.7em; border-radius: 50%;
+	background: var(--accent); border: 2px solid var(--surface-solid); box-shadow: 0 0 0 2px var(--accent), 0 0 10px rgba(var(--accent-rgb), 0.7);
+}
+.tl-card {
+	position: relative; padding: 0.7em 1em; background: var(--surface);
+	border: 1px solid var(--border); border-radius: 10px;
+	-webkit-backdrop-filter: blur(10px) saturate(120%); backdrop-filter: blur(10px) saturate(120%);
+	transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.tl-card:hover { transform: translateX(3px); border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 16px rgba(var(--accent-rgb), 0.3); }
+.tl-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.55em; }
+.tl-role { font-size: 1em; font-weight: 700; color: var(--heading-sub); }
+.tl-org { font-size: 0.88em; color: var(--text); margin-top: 0.05em; }
+.tl-detail { margin: 0.3em 0 0; font-size: 0.84em; color: var(--text-soft); line-height: 1.5; }
+/* Document links: neutral outlined (teal only on hover) so they're distinct
+   from the periwinkle year chip and the teal CV button. */
+.tl-docs { display: flex; flex-wrap: wrap; gap: 0.45em; margin-top: 0.7em; }
+.tl-doc {
+	display: inline-flex; align-items: center; gap: 0.4em;
+	font-family: var(--mono); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+	padding: 0.3em 0.75em; color: var(--text-soft);
+	border: 1px solid var(--border); border-radius: 5px; background: transparent;
+	transition: color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.tl-doc i { color: var(--accent); }
+.tl-doc:hover { color: var(--accent-text); border-color: var(--accent); box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.3); }
+
+/* --------------------------------------------------------------------------
+   12. Research — pipeline knowledge graph (methods ▸ core ▸ sciences)
+   -------------------------------------------------------------------------- */
+/* 3-band grid; nodes are in normal flow (flex columns) so the lists can grow
+   as tall as needed. The centre panel is the fixed "core": it shows the hub
+   identity by default and the selected topic's detail on hover/tap. Built by
+   research-render.js from the RESEARCH_GRAPH array. */
+.kgrid {
+	display: grid;
+	grid-template-columns: 1fr auto minmax(17em, 23em) auto 1fr;
+	align-items: stretch;
+	gap: 0.9em;
+	width: 100%;
+	text-align: left;
+}
+.kcol { display: flex; flex-direction: column; justify-content: center; gap: 0.7em; }
+.kcol-head {
+	font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+	color: var(--text-soft); margin-bottom: 0.2em; text-align: center;
+}
+.kflow { display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.6em; opacity: 0.7; }
+
+.knode {
+	display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.12em;
+	width: 100%; padding: 0.7em 0.9em; min-height: 3.5em;
+	background: var(--surface); border: 1px solid var(--border); border-radius: 11px;
+	-webkit-backdrop-filter: blur(10px) saturate(120%); backdrop-filter: blur(10px) saturate(120%);
+	text-align: center; cursor: pointer; color: var(--text);
+	transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+	animation: knode-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes knode-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.knode .kn-title { font-weight: 700; font-size: 0.96em; color: var(--heading-sub); line-height: 1.2; }
+.knode .kn-sub { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.02em; color: var(--text-soft); text-transform: lowercase; line-height: 1.3; margin-top: 0.1em; }
+.knode:hover, .knode:focus-visible, .knode.active {
+	transform: translateY(-2px); border-color: var(--accent);
+	box-shadow: 0 0 0 1px var(--accent), 0 0 16px rgba(var(--accent-rgb), 0.4); outline: none;
+}
+.kgrid.dim .knode:not(.active) { opacity: 0.45; }
+
+/* centre core / detail panel — fixed position, vertically centred */
+.kpanel {
+	display: flex; flex-direction: column; justify-content: center;
+	min-height: 12em; padding: 1.3em 1.4em; text-align: left;
+	background: var(--surface-solid); border: 1px solid var(--accent);
+	border-top: 3px solid var(--accent); border-radius: 14px;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 22px rgba(var(--accent-rgb), 0.14);
+	transition: box-shadow 0.25s ease;
+}
+.kpanel.active { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 26px rgba(var(--accent-rgb), 0.3); }
+.kpanel-default { text-align: center; }
+.kpanel.active .kpanel-default { display: none; }
+.kpanel-hub { font-size: 1.5em; font-weight: 900; letter-spacing: -0.01em; color: var(--heading); line-height: 1.1; }
+.kpanel-tagline { margin-top: 0.5em; font-family: var(--mono); font-size: 0.78rem; line-height: 1.5; color: var(--text-soft); }
+.kpanel-body { display: none; }
+.kpanel.active .kpanel-body { display: block; animation: kpanel-in 0.25s ease both; }
+@keyframes kpanel-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.kp-kind { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text); margin-bottom: 0.25em; }
+.kp-title { font-weight: 700; font-size: 1.3em; color: var(--heading-sub); line-height: 1.2; margin-bottom: 0.35em; }
+.kp-lead { font-size: 0.92em; color: var(--text-soft); line-height: 1.5; margin-bottom: 0.7em; }
+.kp-list { display: flex; flex-direction: column; gap: 0.35em; margin: 0; }
+.kp-list li { position: relative; padding-left: 1.1em; font-size: 0.9em; line-height: 1.45; color: var(--text); }
+.kp-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent); font-size: 0.82em; top: 0.15em; }
+.kp-links { display: flex; flex-wrap: wrap; gap: 0.5em 1.2em; margin-top: 0.9em; }
+.kp-related {
+	display: inline-flex; align-items: center; gap: 0.4em;
+	font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.03em; text-transform: uppercase;
+	color: var(--accent-text); border-bottom: 1px dotted var(--accent); padding-bottom: 1px; cursor: pointer;
+	transition: color 0.2s ease, gap 0.2s ease;
+}
+.kp-related:hover { color: var(--btn-hover); gap: 0.6em; }
+.kp-related[hidden] { display: none; }  /* explicit display above would otherwise override [hidden] */
+
+@media screen and (max-width: 820px) {
+	.kgrid { grid-template-columns: 1fr; }
+	.kflow { transform: rotate(90deg); font-size: 1.3em; }
+	.kpanel { min-height: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   13. Contact — unified ID card + theme toggle
+   -------------------------------------------------------------------------- */
+#contact .content { text-align: left; }
+
+.contact-wrap { display: flex; justify-content: center; }
+.contact-wrap .idbadge { flex: 0 1 30em; max-width: 100%; }
+
+.idbadge { position: relative; display: flex; flex-direction: column; }
+.idb-body { position: relative; padding: 1.2em 1.35em; flex: 1; display: flex; flex-direction: column; }
+.idb-name { font-size: 1.5em; font-weight: 900; letter-spacing: -0.02em; color: var(--heading); line-height: 1.1; }
+.idb-role { margin: 0.15em 0 0.7em; font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.05em; color: var(--text-soft); text-transform: uppercase; }
+.idb-status { display: inline-flex; align-items: center; gap: 0.5em; font-family: var(--mono); font-size: 0.8rem; color: var(--text); margin-bottom: 0.9em; }
+.idb-status .dot { width: 0.6em; height: 0.6em; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); animation: idb-pulse 2.4s ease-in-out infinite; }
+@keyframes idb-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+.idb-field { display: flex; gap: 0.6em; font-size: 0.9em; margin-bottom: 0.3em; }
+.idb-field .idb-k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--link); min-width: 5em; padding-top: 0.25em; }
+.idb-field a { color: var(--text); }
+.idb-field a:hover { color: var(--accent-text); }
+/* separator line above the socials */
+.idb-socials { display: flex; gap: 1em; margin-top: auto; padding-top: 0.9em; border-top: 1px solid var(--border); }
+.idb-socials a { color: var(--text-soft); font-size: 1.45em; transition: color 0.2s ease, transform 0.2s ease; }
+.idb-socials a:hover { color: var(--accent); transform: translateY(-2px); }
+
+/* holo-sheen header bar (dialled down) */
+.idbadge.holo::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+	background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.07), transparent 45%, rgba(var(--link-rgb), 0.08)); }
+.idb-bar {
+	display: flex; align-items: center; justify-content: space-between; padding: 0.5em 1.1em;
+	font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-text);
+	border-bottom: 1px solid var(--border); background: rgba(var(--accent-rgb), 0.10);
+}
+@media screen and (max-width: 736px) {
+	.contact-wrap .idbadge { flex-basis: 100%; }
+}
+
+/* Theme toggle — sun/moon icon; the icon itself turns yellow + glows on hover
+   (no filled circle). */
+.theme-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.5em;
+	height: 2.5em;
+	background: transparent;
+	color: var(--text);
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+.theme-icon:hover { color: var(--toggle-hover); text-shadow: 0 0 12px var(--toggle-glow); }
+body.light .theme-icon .fa-moon,
+body:not(.light) .theme-icon .fa-sun { display: none; }
+body.light .theme-icon .fa-sun,
+body:not(.light) .theme-icon .fa-moon {
+	display: inline-block;
+	transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.theme-icon:hover .fa-sun,
+.theme-icon:hover .fa-moon { transform: rotate(360deg); }
+
+/* --------------------------------------------------------------------------
+   14. Scroll-reveal motion (driven by reveal.js)
+   -------------------------------------------------------------------------- */
+/* Slow, uniform rise+fade+deblur — long enough (1.1s) to actually watch the
+   motion settle, with the same easing/blur on every block so they all flow the
+   same way (no section looks different from another). */
+.reveal {
+	opacity: 0;
+	transform: translateY(34px);
+	filter: blur(5px);
+	transition:
+		opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+		filter 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+	transition-delay: var(--reveal-delay, 0ms);
+	will-change: opacity, transform, filter;
+}
+.reveal.is-visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+/* --------------------------------------------------------------------------
+   15. Responsive + reduced motion
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 736px) {
+	.section { padding: 2.5em 0 3em; }
+	.hero h2 { font-size: 3em; }
+	.project-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+	.modal-panel { padding: 1.8em 1.4em; }
+	.modal-img { max-height: 38vh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html { scroll-behavior: auto; }
+	.stardust { animation: none; }
+	.stardust::before,
+	.stardust::after { animation: none; opacity: 0.5; }
+	.project-card { animation: none; transition: none; }
+	.project-card:hover { transform: none; }
+	.project-card:hover .card-media img { transform: none; }
+	.reveal { opacity: 1 !important; transform: none !important; transition: none !important; filter: none !important; }
+	.hero h2, .home-tagline, .hero .button { animation: none; }
+	.search-caret.is-active { animation: none; opacity: 1; }
+	.knode { animation: none; }
+	.idb-status .dot { animation: none; opacity: 1; }
+}
