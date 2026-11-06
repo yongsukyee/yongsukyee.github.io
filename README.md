@@ -1,5 +1,5 @@
 # Suk Yee Yong — Personal Website
 
-[https://img.shields.io/badge/GitHub_Pages-Live-success?style=flat-square&logo=githubpages](https://yongsukyee.github.io)
+[![Live Website](https://img.shields.io/website?url=https%3A%2F%2Fyongsukyee.github.io&style=flat-square&logo=githubpages&label=Live%20Website)](https://yongsukyee.github.io)
 
 © Suk Yee Yong. All rights reserved. See [LICENSE](LICENSE).
