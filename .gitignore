@@ -1,0 +1,16 @@
+# Private notes
+NOTE.md
+.notes/
+
+# AI-facing docs
+CLAUDE.md
+*.CLAUDE.md
+
+# macOS
+.DS_Store
+
+# Editor / OS cruft
+*~
+*.swp
+.idea/
+.vscode/
