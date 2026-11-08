@@ -1,6 +1,6 @@
-# Private notes
+# Personal files
 NOTE.md
-.notes/
+files/cv_sukyee_*.pdf
 
 # AI-facing docs
 CLAUDE.md
@@ -8,9 +8,3 @@ CLAUDE.md
 
 # macOS
 .DS_Store
-
-# Editor / OS cruft
-*~
-*.swp
-.idea/
-.vscode/
